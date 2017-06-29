@@ -1,7 +1,10 @@
 package com.example.logonpf.demomapaspoc;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.example.logonpf.demomapaspoc.api.ApiUtils;
 import com.example.logonpf.demomapaspoc.api.MetroAPI;
@@ -39,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        requestGPSPermission();
 
         if (getIntent() != null) {
             linha = getIntent().getParcelableExtra("LINHA");
@@ -77,6 +80,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     });
 
+        }
+    }
+
+    private void requestGPSPermission() {
+        String permission = android.Manifest.permission.ACCESS_FINE_LOCATION;
+        int grant = ContextCompat.checkSelfPermission(this, permission);
+        if ( grant != PackageManager.PERMISSION_GRANTED) {
+            String[] permission_list = new String[1];
+            permission_list[0] = permission;
+            ActivityCompat.requestPermissions(this, permission_list, 1);
         }
     }
 
