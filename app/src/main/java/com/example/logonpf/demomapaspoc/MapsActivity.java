@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             linha = getIntent().getParcelableExtra("LINHA");
 
             mAPI = ApiUtils.getMetroAPI();
-            
+
             mAPI.getEstacao(linha.getCor())
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
