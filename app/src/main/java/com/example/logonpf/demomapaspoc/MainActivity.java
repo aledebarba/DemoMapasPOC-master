@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvLinhas;
     private LinhaAdapter mAdapter;
     private MetroAPI mService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new LinhaAdapter(new ArrayList<Linha>(),
                 new OnItemClickListener() {
             @Override
-            public void onItemClick(Linha item) {
+            public void onItemClick(Linha linha) {
                 Intent telaMapa = new Intent(MainActivity.this, MapsActivity.class);
+                telaMapa.putExtra("LINHA",linha);
                 startActivity(telaMapa);
             }
         });
